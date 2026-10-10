@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dilmira — сайт массажного салона
 
-## Getting Started
+Одностраничный сайт для **Dilmira · массаж и телесные практики** (Instagram [@massage_dilmira.kz](https://www.instagram.com/massage_dilmira.kz/)).
 
-First, run the development server:
+Стек: Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · lucide-react.
+
+## Быстрый старт
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production-сборка
+npm start        # запуск собранной версии
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Где что редактировать
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Что | Где |
+| --- | --- |
+| **Номер WhatsApp**, текст сообщения | `src/content/site.ts` → `whatsapp.phone` (только цифры, например `77011234567`) |
+| Адрес, телефон, график, карта | `src/content/site.ts` → `contacts` |
+| Услуги, цены, длительность | `src/content/site.ts` → `services` (`price` / `duration`; `null` = «уточнить») |
+| Тексты блоков, FAQ, шаги записи | `src/content/site.ts` |
+| Отзывы | `src/content/site.ts` → `reviews` (пока массив пуст, показывается блок-приглашение в Instagram) |
+| Фотографии | `public/images/*.jpg` — замените файлы на свои с теми же именами |
+| SEO, домен для Open Graph | `src/content/site.ts` → `seo`, `url` |
+| OG-картинка, иконки | `public/og.jpg`, `src/app/icon.svg`, `src/app/apple-icon.png` |
+| Цвета, шрифты, кнопки | `src/app/globals.css` (блок `@theme`) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Пока `whatsapp.phone` пустой, все кнопки записи ведут в Instagram, а подписи на них говорят «Instagram». После ввода номера кнопки автоматически переключаются на `https://wa.me/<номер>?text=…` с готовым сообщением (для каждой услуги своё). Тогда же появляются иконка WhatsApp в шапке и зелёная плавающая кнопка на мобильных.
 
-## Learn More
+## Фотографии
 
-To learn more about Next.js, take a look at the following resources:
+Сейчас стоят **иллюстративные фото с Unsplash** (бесплатная лицензия), под галереей есть подпись об этом. Когда появятся реальные фото салона:
+1. замените файлы в `public/images/`;
+2. в `site.ts` выставьте `gallery.isPlaceholder: false`, чтобы убрать подпись.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Публикация
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Vercel (рекомендуется):** загрузите проект на GitHub, затем на [vercel.com](https://vercel.com) выберите *Add New → Project* и импортируйте репозиторий. Настройки по умолчанию подходят. После публикации впишите итоговый домен в `site.url`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Также подойдёт любой хостинг с Node.js: `npm run build && npm start`.
