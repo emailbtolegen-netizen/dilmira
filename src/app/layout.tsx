@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -51,7 +52,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Анимации появления включаются только при работающем JS — без него контент виден сразу */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Статистика посещений — смотреть в панели Vercel → Analytics */}
+        <Analytics />
+      </body>
     </html>
   );
 }

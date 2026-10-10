@@ -80,8 +80,16 @@ export function Footer() {
           <p>
             © {year} {site.name}. Все права защищены.
           </p>
-          <p>Массаж не заменяет медицинскую помощь. При противопоказаниях проконсультируйтесь с врачом.</p>
+          <p>
+            Разработка сайта —{" "}
+            <a href="https://weblink-app.vercel.app/" target="_blank" rel="noopener" className="font-semibold text-plum transition-colors hover:text-violet">
+              WebLink
+            </a>
+          </p>
         </div>
+        <p className="mt-3 text-[12px] text-muted/80">
+          Массаж не заменяет медицинскую помощь. При противопоказаниях проконсультируйтесь с врачом.
+        </p>
       </div>
     </footer>
   );
